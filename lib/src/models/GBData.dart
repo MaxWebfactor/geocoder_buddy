@@ -1,4 +1,3 @@
-// Geocoder Buddy Data Model
 import 'dart:convert';
 
 GBData gbDataFromJson(String str) => GBData.fromJson(json.decode(str));
@@ -9,7 +8,6 @@ class GBData {
   GBData({
     required this.placeId,
     required this.osmType,
-    required this.id,
     required this.lat,
     required this.lon,
     required this.placeRank,
@@ -17,11 +15,12 @@ class GBData {
     required this.displayName,
     required this.address,
     required this.boundingbox,
+    this.id,
   });
 
   int placeId;
   String osmType;
-  int id;
+  int? id;
   String lat;
   String lon;
   int placeRank;
@@ -46,7 +45,7 @@ class GBData {
   Map<String, dynamic> toJson() => {
         "place_id": placeId,
         "osm_type": osmType,
-        "osm_id": id,
+        if (id != null) "osm_id": id,
         "lat": lat,
         "lon": lon,
         "place_rank": placeRank,
@@ -90,7 +89,6 @@ class Address {
         road: json["road"] ?? "",
         village: json["village"] ?? "",
         houseNumber: json["houseNumber"] ?? "",
-        village: json["village"] ?? "",
         city: json["city"] ?? "",
         municipality: json["municipality"] ?? "",
         county: json["county"] ?? "",
